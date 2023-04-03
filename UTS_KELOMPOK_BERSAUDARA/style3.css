@@ -1,0 +1,154 @@
+
+body {
+  background-image: url('gambar/backgroundawal.gif');
+  font-family: "comic sans ms";
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-attachment: fixed;
+}
+  
+  #bungkus {
+    width: auto;
+    height: 689px;
+    border-radius: 8px;
+  }
+  
+  #bar {
+    height: 90px;
+    background: rgb(199, 199, 247);
+    text-align: center;
+    border-radius: 5px;
+    border-style: double;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  #bar img:not([class]){
+    max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  }
+
+  #bar img {
+    height: 60px;
+    margin-top: 5px;
+  }
+
+  #bar h1 {
+    font-size: 15px;
+    margin: auto;
+  }
+
+  #area-karakter{
+    height: 460px;
+    text-align: center;
+    margin-top: 15%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .title{
+    margin: 110px;
+  }
+
+  #tombol {
+    text-align: center;
+    height: 15%;
+    justify-content: center;
+    display: flex;
+    background: rgb(0, 255, 140);
+    border-radius: 5px;
+    border-style: double;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  input[type="text"]{
+    margin-bottom: 10px;
+    border-radius: 10px;
+    text-align: center;
+    width: 150%;
+  }
+
+  input[type="button"]{
+    margin: 2px;
+    border-radius: 10px;
+    text-decoration: none;
+  }
+  
+  #arena {
+    height: auto;
+    text-align: center;
+    position: relative;
+    background-color:rgba(255, 0, 0, 0);
+  }
+   
+  #karakter {
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+    background-color: transparent;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    background-size: 300%;
+    background-image: url(gambar/logokelinci.png);
+    background-position: center;
+ }
+
+
+  #area-karakter #tombol-panah{
+    height: 60px;
+  }
+  
+  #tombol-panah {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 150px;
+    margin: 0 auto;
+  }
+  
+  .panah-kiri, .panah-kanan {
+    width: 50px;
+    height: 50px;
+    background-color: #ffffff00;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .panah-kiri img, .panah-kanan img {
+    width: 50px;
+    height: 50px;
+  }
+
+  #tombol {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 20%;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #tombol a {
+    display: block;
+    text-decoration: none;
+    font-size: 170%;
+  }
+  

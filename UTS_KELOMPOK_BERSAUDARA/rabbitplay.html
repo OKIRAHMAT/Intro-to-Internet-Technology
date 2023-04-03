@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>UMN Gotcha</title>
+    <link rel="stylesheet" href="style3.css" type="text/css" />
+    <link rel="shortcut icon" href="gambar/logo asli.jpeg" type="image/x-icon">
+</head>
+<body>
+    <div id="bungkus">
+        <div id="bar">
+            <h1 style="font-size: 300%; font-family:'Courier New', Courier, monospace; margin-top: 1%;">Universitas Multimedia Nusantara Gotcha</h1>
+        </div>
+        <div id="area-karakter">
+            <h2 style="background-color: rgb(247, 176, 69); width: 30%; margin: auto;border-radius: 10px;">Choose your character</h2>
+            <div id="arena">
+                <div id="karakter"></div>
+                <div id="tombol-panah">
+                    <a class="panah-kiri" href="beranda.html">
+                        <img src="gambar/kirikuning.png" alt="Arrow Image"/>
+                    </a>
+                      
+                    <a class="panah-kanan" href="beranda.html">
+                        <img src="gambar/kanankuning.png" alt="Arrow Image"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="tombol">
+            <form name="aksi" action="" method="POST">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username">
+                <input type="button" value="Submit" onclick="saveUsername()">
+                <a href="playRABBIT.html">START</a>
+            </form>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

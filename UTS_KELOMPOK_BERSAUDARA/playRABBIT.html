@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link href="style2.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript">
+
+		var meal = 8;
+		var sleep = 8;
+		var fun = 8;
+		var jam = 8;
+		var menit = 8;
+		var jamStr;
+		var waktu;
+		var tokoh;
+		var mutex;
+		var nyawa = 90;
+		var lvl = 1;
+		var lvlcount = 0;
+		var buffer = 0;
+		var lock = 0;
+		var support = 0;
+		var buffer3 = 0;
+		var skor = 0;
+		var salam;
+		var buffer4 = 0;
+		
+		function mulaiMain() {
+			if (buffer == 0){
+				buffer = 1;
+				buffer4 = 0;
+				jamWaktu();
+				status();
+				cetakLevel();
+				normalMode();
+			}	
+		}
+		
+		function resetMain() {
+			meal = 8;
+			sleep = 8;
+			fun = 8;
+			jam = 6;
+			nyawa = 100;
+			menit = 0;
+			buffer = 0;
+			skor = 0;
+			buffer4 = 0;
+			mulaiMain();
+		}
+		
+		function stopMain() {
+			if(buffer == 1){
+				buffer = 0;
+				buffer4 = 0;
+				clearTimeout(waktu);
+				clearTimeout(tStatus);
+				clearTimeout(tLevel);
+				clearTimeout(tokoh);
+				if(lvl == 1)
+				{
+					var htmlSisip = '<img src="gambar/Rabbit kanan.gif" />';
+				}
+				else if(lvl == 2)
+				{
+					var htmlSisip = '<img src="gambar/Rabbit kanan v2.gif" />';
+				}
+				else if(lvl == 3)
+				{
+					var htmlSisip = '<img src="gambar/Rabbit kanan v3.gif" />';
+				}
+				document.getElementById("character").innerHTML = htmlSisip;
+				mutex = setTimeout(function () {normalmode()}, 5000);
+			}
+		}
+		
+		function menitWaktu() {
+			if(menit < 10) menit = "0" + menit;
+			document.getElementById("menit").innerHTML = menit;
+			waktu = setTimeout(function () {menitWaktu()}, 2000);
+		}
+
+		function jamWaktu() {
+			var kosong = "0";
+			jamStr = (jam < 10 ? kosong + jam : jam) + ":" + (menit < 10 ? "0" : "") + menit;
+   			document.getElementById("jam").innerHTML = jamStr;
+			menit += 1;
+			skor += 2;
+			document.getElementById("angka-skor").innerHTML = skor;
+  			if (menit >= 60) {
+    			jam += 1;
+   				menit = 0;
+  			}
+  			if (jam == 24) jam = 0;
+
+			  if (jam >= 18) {
+				document.body.style.backgroundImage = "url('gambar/background malam.jpg')";
+			} else if (jam >= 6 && jam < 18) {
+				document.body.style.backgroundImage = "url('gambar/background.jpg')";
+			}
+			if (jam == 6 && menit == 2)
+			{
+				salam = "Good Morning"
+				document.getElementById("sapa").innerHTML = salam;
+			}
+			else if (jam == 8 && menit == 9)
+			{
+				salam = "Good Morning"
+				document.getElementById("sapa").innerHTML = salam;
+			}else if (jam == 12 && menit == 2)
+			{
+				salam = "Good Afternoon"
+				document.getElementById("sapa").innerHTML = salam;
+			}
+			else if (jam == 18 && menit == 2)
+			{
+				salam = "Good Evening"
+				document.getElementById("sapa").innerHTML = salam;
+			}
+			else if (jam == 21 && menit == 2)
+			{
+				salam = "Good Night"
+				document.getElementById("sapa").innerHTML = salam;
+			}
+
+  			waktu = setTimeout(function () {
+   			 	jamWaktu();
+  			}, 1000);
+		}
+		
+		function cetakLevel() {
+			if(nyawa == 0){
+				alert("Game Over, Nyawa anda telah mencapai 0");
+				resetMain();
+			}
+			if (fun <= 0) fun = 0;
+			if (meal <= 0) meal = 0;
+			if (sleep <= 0) sleep = 0;
+			if (fun >= 30) fun = 30;
+			if (meal >= 30) meal = 30;
+			if (sleep >= 30) sleep = 30;
+			if (nyawa > 100) nyawa = 100;
+			if (lvl > 2) lvl = 3;
+			if (lvl > 2) lvlcount = 0;
+			if (lvlcount >= 120) 
+			{
+				lvl += 1;
+				support = 0;
+			}
+			if (lvlcount >= 120) lvlcount = 0;
+			
+			if(lock != 1)
+			{
+				if(support == 0)
+				{
+					if(lvl == 1)
+					{
+						var htmlSisip = '<img src="gambar/Rabbit kanan.gif" />';
+					}
+					else if(lvl == 2)
+					{
+						var htmlSisip = '<img src="gambar/Rabbit kanan v2.gif" />';
+					}
+					else if(lvl == 3)
+					{
+						var htmlSisip = '<img src="gambar/Rabbit kanan v3.gif" />';
+					}
+					document.getElementById("character").innerHTML = htmlSisip;
+					mutex = setTimeout(function () {normalmode()}, 1000);
+					support = 1;
+				}
+			}
+			document.getElementById("fun-level").innerHTML = fun;
+			document.getElementById("meal-level").innerHTML = meal;
+			document.getElementById("sleep-level").innerHTML = sleep;
+			document.getElementById("nyawa-level").innerHTML = nyawa;
+			document.getElementById("lvl-level").innerHTML = lvl;
+			tLevel = setTimeout(function(){cetakLevel();}, 1000);
+		}
+		
+		function status() {
+			lvlcount += 1;
+			if (meal <= 0 || sleep <= 0) nyawa -= 4;
+			if (nyawa <= 0) nyawa = 0;
+			tStatus = setTimeout(function(){status();}, 5000);
+		}
+		
+		function normalMode() {
+			if(lvl == 1)
+			{
+				var htmlSisip = '<img src="gambar/Rabbit kanan.gif" />';
+			}
+			else if(lvl == 2)
+			{
+				var htmlSisip = '<img src="gambar/Rabbit kanan v2.gif" />';
+			}
+			else if(lvl == 3)
+			{
+				var htmlSisip = '<img src="gambar/Rabbit kanan v3.gif" />';
+			}
+			document.getElementById("character").innerHTML = htmlSisip;
+			mutex = setTimeout(function () {normalmode()}, 5000);
+		}
+		
+		function bermain() {
+			if(buffer == 1){
+				fun += 3;
+				meal -= 1;
+				buffer4 = 1;
+				sleep -= 1;
+				
+				if(buffer4 = 1){
+					function spawnGambar() {
+						var gambar = document.createElement("img");
+						gambar.src = "gambar/Objek main rabbit.gif";
+						gambar.style.position = "absolute";
+						gambar.style.top = Math.random() * (window.innerHeight - gambar.height) + "px";
+						gambar.style.left = Math.random() * (window.innerWidth - gambar.width) + "px";
+						document.body.appendChild(gambar);
+						setTimeout(function() {
+							gambar.remove();
+						}, 3000);
+					}
+				}
+				setInterval(spawnGambar, 1000);
+			}
+		}
+		
+		function makan() {
+			if(buffer == 1){
+				meal += 3;
+				fun -= 1;
+				sleep -= 1;
+				buffer4 = 0;
+				var htmlSisip = '<img src="gambar/Rabbit makan.gif" />';
+				document.getElementById("character").innerHTML = htmlSisip;
+				tokoh = setTimeout(function(){normalMode()}, 5000);
+			}
+		}
+		
+		function tidur() {
+			if(buffer == 1){
+				sleep += 3;
+				fun -= 1;
+				meal -= 1;
+				buffer4 = 0;
+				var htmlSisip = '<img src="gambar/Rabbit tidur.gif" />';
+				document.getElementById("character").innerHTML = htmlSisip;
+				tokoh = setTimeout(function(){normalMode()}, 5000);
+			}
+		}
+
+		function obat() {
+			if(buffer == 1){
+				nyawa += 10;
+				buffer4 = 0;
+				if (nyawa > 100) nyawa = 100;
+				var htmlSisip = '<img src="gambar/Rabbit obat.gif" />';
+				document.getElementById("character").innerHTML = htmlSisip;
+				tokoh = setTimeout(function(){normalMode()}, 5000);
+			}
+		}
+	</script>
+	<script src="username.js"></script>
+</head>
+<body>
+
+<div id="bungkus">
+
+	<div id="top-panel">
+		<div id="fun-stat" class="level-wrap">
+			<span class="title">Main</span>
+			<span id="fun-level" class="level"></span>
+		</div>
+		<div id="meal-stat" class="level-wrap">
+			<span class="title">Makan</span>
+			<span id="meal-level" class="level"></span>
+		</div>
+		<div id="sleep-stat" class="level-wrap">
+			<span class="title">Tidur</span>
+			<span id="sleep-level" class="level"></span>
+		</div>
+		<div id="nyawa-stat" class="level-wrap">
+			<span class="title">Nyawa</span>
+			<span id="nyawa-level" class="level"></span>
+		</div>
+	</div>
+	
+	<div id="arena">
+		<div id="rank">
+			<span id="nama-level">Level</span>
+			<span id="lvl-level" class="level"></span>
+		</div>
+		<div id="jam"></div>
+		<div id="poin">
+			<span id="nama-skor" class="skor">Your Score:</span>
+			<span id="angka-skor" class="skor"></span>
+		</div>
+		<div id="character"></div>
+		<img id="character2">
+		
+	</div>
+	
+	<div id="action">
+		<span id="Display-username"></span>
+		<form name="aksi" action="" method="POST">
+			<input type="button" name="mulai" value="START" onclick="mulaiMain()" />
+			<input type="button" name="pause" value="STOP" onclick="stopMain()" />
+			<input type="button" name="pause" value="REPLAY" onclick="resetMain()" />
+			<input type="button" name="meal" value="MAKAN" onclick="makan()" />
+			<input type="button" name="fun" value="BERMAIN" onclick="bermain()" />
+			<input type="button" name="sleep" value="TIDUR" onclick="tidur()" />
+			<input type="button" name="nyawa" value="OBAT" onclick="obat()" />
+		</form>
+		<span id="sapa"></span>
+	</div>
+	
+</div><!---/#bungkus--->
+<script>
+	var posisiX = 0;
+	var posisiY = 0;
+	window.onload = function() {
+		var gambar = document.getElementById("character2");
+		var lebarLayar = document.documentElement.clientWidth;
+		var tinggiLayar = document.documentElement.clientHeight;
+
+		document.addEventListener("keydown", function(event) {
+			var jarakX = Math.abs(gambar.offsetLeft - posisiX);
+			var jarakY = Math.abs(gambar.offsetTop - posisiY);
+
+			
+			if (buffer4 == 1)
+			{
+				if (jarakX < 1000 && jarakY < 1000) {
+					gambar.src = "gambar/Rabbit kanan.gif";
+				}
+				if (event.key == "w"){
+				posisiY -= 15;
+					if (posisiY < 0) {
+						posisiY = 0;
+						}
+				gambar.style.top = posisiY + "px";
+				gambar.src = "gambar/Rabbit belakang.gif"
+				} else if (event.key == "s"){
+					posisiY += 15;
+						if (posisiY > tinggiLayar - gambar.height) {
+							posisiY = tinggiLayar - gambar.height;
+						}
+					gambar.style.top = posisiY + "px";
+					gambar.src = "gambar/Rabbit kanan.gif"
+				} else if (event.key == "a"){
+					posisiX -= 15;
+						if (posisiX < 0) {
+								posisiX = 0;
+						}
+					gambar.style.left = posisiX + "px";
+					gambar.src = "gambar/Rabbit kiri.gif"
+				} else if (event.key == "d"){
+					posisiX += 15;
+						if (posisiX > lebarLayar - gambar.width) {
+							posisiX = lebarLayar - gambar.width;
+						}
+					gambar.style.left = posisiX + "px";
+					gambar.src = "gambar/Rabbit kanan.gif"
+				}
+			}
+			});
+		}
+</script>
+</body>
+</html>

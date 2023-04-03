@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="style2.css" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="bungkus">
+
+            <div id="top-panel">
+                <div id="fun-stat" class="level-wrap">
+                    <span class="title">FUN</span>
+                    <span id="fun-level" class="level"></span>
+                </div><!---/#fun-stat--->
+                <div id="meal-stat" class="level-wrap">
+                    <span class="title">MEAL</span>
+                    <span id="meal-level" class="level"></span>
+                </div><!---/#energy-stat--->
+                <div id="sleep-stat" class="level-wrap">
+                    <span class="title">SLEEP</span>
+                    <span id="sleep-level" class="level"></span>
+                </div><!---/#sleep-stat--->
+                <div id="nyawa-stat" class="level-wrap">
+                    <span class="title">NYAWA</span>
+                    <span id="nyawa-level" class="level"></span>
+                </div><!---/#nyawa-stat--->
+            </div><!---/#top-panel--->
+            
+            <div id="arena">
+                <div id="jam"></div>
+                <div id="character"></div>
+            </div><!---/#arena--->
+            
+            <div id="action">
+                <form name="aksi" action="" method="POST">
+                    <input type="button" name="fun" value="BERMAIN" onclick="bermain()" />
+                    <input type="button" name="meal" value="MAKAN" onclick="makan()" />
+                    <input type="button" name="sleep" value="TIDUR" onclick="tidur()" />
+                    <input type="button" name="nyawa" value="OBAT" onclick="bobo()" />
+                    <input type="button" name="mulai" value="START" onclick="mulaiMain()" />
+                    <input type="button" name="pause" value="STOP" onclick="stopMain()" />
+                    <input type="button" name="pause" value="REPLAY" onclick="resetMain()" />
+                </form>
+            </div><!---/#action--->
+            
+        </div><!---/#bungkus--->
+        <script>
+            var meal = 8;
+            var sleep = 8;
+            var fun = 8;
+            var jam = 8;
+            var menit = 8;
+            var jamStr;
+            var waktu;
+            var snoopy;
+            var nyawa = 90;
+            
+            function mulaiMain() {
+                jamWaktu();
+                status();
+                cetakLevel();
+                normalMode();
+            }
+            
+            function resetMain() {
+                meal = 8;
+                sleep = 8;
+                fun = 8;
+                jam = 6;
+                nyawa = 90;
+                menit = 0;
+                mulaiMain();
+            }
+            
+            function stopMain() {
+                clearTimeout(waktu);
+                clearTimeout(tStatus);
+                clearTimeout(tLevel);
+                clearTimeout(snoopy);
+                var htmlSisip = '<img src="gambar/Slime depan.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+            }
+            
+            function menitWaktu() {
+                if(menit < 10) menit = "0" + menit;
+                document.getElementById("menit").innerHTML = menit;
+                waktu = setTimeout(function () {menitWaktu()}, 2000);
+            }
+
+            function jamWaktu() {
+                var kosong = "0";
+                jamStr = (jam < 10 ? kosong + jam : jam) + ":" + (menit < 10 ? "0" : "") + menit;
+                document.getElementById("jam").innerHTML = jamStr;
+                menit += 1;
+                if (menit >= 60) {
+                    jam += 1;
+                    menit = 0;
+                }
+                if (jam == 24) jam = 0;
+                waktu = setTimeout(function () {
+                    jamWaktu();
+                }, 2000);
+            }
+            
+            function cetakLevel() {
+                if (fun <= 0) fun = 0;
+                if (meal <= 0) meal = 0;
+                if (sleep <= 0) sleep = 0;
+                if (fun >= 30) fun = 30;
+                if (meal >= 30) meal = 30;
+                if (sleep >= 30) sleep = 30;
+                if (nyawa > 100) nyawa = 100;
+                
+                document.getElementById("fun-level").innerHTML = fun;
+                document.getElementById("meal-level").innerHTML = meal;
+                document.getElementById("sleep-level").innerHTML = sleep;
+                document.getElementById("nyawa-level").innerHTML = nyawa;
+                tLevel = setTimeout(function(){cetakLevel();}, 1000);
+            }
+            
+            function status() {
+                fun -= 1;
+                meal -= 1;
+                sleep -= 1;
+                if (meal <= 0 || sleep <= 0) nyawa -= 4;
+                if (nyawa <= 0) nyawa = 0;
+                tStatus = setTimeout(function(){status();}, 5000);
+            }
+            
+            function normalMode() {
+                var htmlSisip = '<img src="gambar/Slime depan.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+            }
+            
+            function bermain() {
+                fun += 3;
+                var htmlSisip = '<img src="gambar/snoopy_draws.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+                snoopy = setTimeout(function(){normalMode()}, 5000);
+            }
+            
+            function makan() {
+                meal += 3;
+                var htmlSisip = '<img src="gambar/Slime makan.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+                snoopy = setTimeout(function(){normalMode()}, 5000);
+            }
+            
+            function tidur() {
+                sleep += 3;
+                if (sleep >= 10) sleep = 10;
+                var htmlSisip = '<img src="gambar/Slime tidur.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+                snoopy = setTimeout(function(){normalMode()}, 5000);
+            }
+
+            function obat() {
+                nyawa += 10;
+                if (nyawa > 100) nyawa = 100;
+                var htmlSisip = '<img src="gambar/Slime obat.gif" />';
+                document.getElementById("character").innerHTML = htmlSisip;
+                snoopy = setTimeout(function(){normalMode()}, 5000);
+            }
+        </script>
+    </body>
+</html>
